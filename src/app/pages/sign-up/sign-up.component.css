@@ -30,4 +30,14 @@
       margin-top: 4rem;
     }
   }
-
+  @media only screen and (max-width: 390px) {
+    .form-signUp {
+      width: 90%;
+    }
+    .banklogin {
+      font-size: 1rem;
+    }
+    .createUser{
+      margin-top: 4rem;
+    }
+  }
