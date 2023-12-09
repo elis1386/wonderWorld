@@ -1,0 +1,76 @@
+<div class="modal fade" id="updateBook" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update book</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="submitForm()">
+          <div class="mb-3">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input
+              type="text"
+              class="form-control"
+              id="isbn"
+              formControlName="isbn"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              formControlName="title"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="publisher" class="form-label">Publisher</label>
+            <input
+              type="text"
+              class="form-control"
+              id="publisher"
+              formControlName="publisher"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="image"
+              formControlName="image"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="publishedDate" class="form-label">Published Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="publishedDate"
+              formControlName="publishedDate"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-update" data-bs-dismiss="modal">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

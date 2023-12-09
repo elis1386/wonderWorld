@@ -1,0 +1,29 @@
+<form class="search me-3" role="search" [formGroup]="searchForm">
+  <input
+    type="search"
+    class="form-control"
+    formControlName="searchTerm"
+    (input)="onSearchInputChange()"
+    placeholder="Search by book title"
+  />
+  <section
+    class="box"
+    *ngIf="showBox && results.length; else noResultsSection"
+  >
+    <article
+      *ngFor="let result of results"
+      class="item"
+      (click)="goToCurrentBook(result.isbn)"
+      aria-autocomplete="none"
+    >
+      <div
+        class="image"
+        [style.backgroundImage]="'url(' + result.image + ')'"
+      ></div>
+      <div class="item-text">{{ result.title }}</div>
+    </article>
+  </section>
+  <ng-template #noResultsSection>
+    <article *ngIf="showBox" class="py-2 px-2 border-none">No results</article>
+  </ng-template>
+</form>

@@ -1,0 +1,30 @@
+.all {
+  background-color: var(--secondary-accent-color);
+  color: white;
+}
+.banner{
+  height: 50vh;
+}
+.banner-photo {
+  background-image: url('../../../assets/book-banner.jpg');
+  background-repeat: no-repeat;
+  object-fit: contain;
+  height: 50vh;
+
+}
+@media only screen and (max-width: 1000px) {
+  .banner-photo{
+      display: none;
+  }
+  .banner{
+    height: auto;
+  }
+  .box{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 425px) {
+    .banner{
+        display: none;
+    }
+  }

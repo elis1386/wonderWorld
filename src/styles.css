@@ -1,0 +1,27 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --primary-accent-color: #cd6858;
+  --secondary-accent-color: #cfa987;
+  --text-color: #3c3c3c;
+  --link-color: #51624f;
+  --delete-btn-color: #fb7d7d; 
+  --update-btn-color: #75a1fb;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Goudy Bookletter 1911", serif;
+}
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}

@@ -1,0 +1,37 @@
+<app-modal></app-modal>
+<main class="container py-5">
+  <section class="title">
+    <h3><span>All</span> Books</h3>
+    <div class="d-flex justify-content-end gap-4 mb-4 mt-4 cat">
+      <button class="btn btn-sort" (click)="sortBooksAZ()">Sort A-Z</button>
+      <button class="btn btn-sort" (click)="sortBooksZA()">Sort Z-A</button>
+    </div>
+  </section>
+  <section class="card-box">
+    <article
+      class="card"
+      *ngFor="let book of books"
+      [@borrowBookAnimation]="book.status"
+    >
+      <img src="{{ book.image }}" alt="{{ book.title }}" />
+      <div class="info">
+        <h3 class="book-name" (click)="goToCurrentBook(book.isbn)">
+          {{ book.title }}
+        </h3>
+        <p class="book-info" *ngIf="book.authors.length > 0">
+          {{ book.authors[0].name }}
+        </p>
+        <button
+          href=""
+          class="btn borrow-btn"
+          [ngClass]="{
+            disabled: book.status === 'borrowed'
+          }"
+          (click)="borrowBook(book)"
+        >
+          Borrow book
+        </button>
+      </div>
+    </article>
+  </section>
+</main>

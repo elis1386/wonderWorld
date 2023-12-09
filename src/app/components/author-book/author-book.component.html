@@ -1,0 +1,14 @@
+<p class="mt-2">Related book:</p>
+<section class="d-flex gap-3 w-25 flex-2">
+  <article
+    *ngFor="let book of relatedBooks"
+    (click)="goToCurrentBook(book.isbn)"
+  >
+    <img
+      *ngIf="book?.image"
+      src="{{ book.image }}"
+      class="same-book"
+      alt="same series book"
+    />
+  </article>
+</section>

@@ -1,0 +1,39 @@
+.container{
+  height: 500px;
+}
+.card {
+    width: 230px;
+  }
+  .card-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .card-img {
+    object-fit: cover;
+  }
+  .btn-return {
+    background-color: var(--secondary-accent-color);
+    color: white;
+  }
+  @media only screen and (max-width: 768px) {
+    .card {
+      width: 32%;
+    }
+    .card-img {
+      object-fit: cover;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .container{
+      height: auto;
+    }
+    .card {
+      width: 75%;
+    }
+    .card-img {
+      object-fit: contain;
+      padding: .5em 0;
+    }
+  }
+  

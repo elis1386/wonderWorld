@@ -1,0 +1,26 @@
+footer {
+    background-color: white;
+    height: 80px;
+  }
+  
+  .logoFooter {
+    color: var(--primary-accent-color);
+  }
+  
+  .logoFooter:hover {
+    color: var(--text-color);
+  }
+  
+  @media only screen and (max-width: 425px) {
+    .logoFooter {
+      position: relative;
+      font-size: 0;
+    }
+  
+    .logoFooter::before {
+      content: "W";
+      font-size: 32px;
+      color: var(--primary-accent-color);
+    }
+  }
+  

@@ -1,0 +1,16 @@
+.avatar {
+  width: 50px;
+}
+.btn-update {
+    margin-right: 1em;
+}
+@media only screen and (max-width: 425px) {
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .btn-update {
+    margin-right: 0;
+}
+}

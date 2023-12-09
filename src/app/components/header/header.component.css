@@ -1,0 +1,80 @@
+header {
+  flex-wrap: wrap;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+  background-color: white;
+}
+.rounded {
+  width: 30px;
+  height: 30px;
+}
+.logo {
+  color: var(--primary-accent-color);
+}
+.logo:hover {
+  color: var(--text-color);
+}
+figure {
+  margin-bottom: 0;
+}
+.login {
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  padding: 0.3em;
+}
+.sign-up {
+  color: white;
+  background-color: var(--text-color);
+}
+.sign-up:hover {
+  color: white;
+  background-color: var(--primary-accent-color);
+}
+.login:hover {
+  color: var(--primary-accent-color);
+  border: 1px solid var(--primary-accent-color);
+}
+.bi-person-circle,
+.bi-cloud-fill {
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+.dropdown-toggle::after {
+  color: var(--text-color);
+}
+
+@media only screen and (max-width: 425px) {
+  .logo {
+    position: relative;
+    font-size: 0;
+  }
+
+  .logo::before {
+    content: "W";
+    font-size: 32px;
+    color: var(--primary-accent-color);
+  }
+}
+
+.logo:hover {
+  color: var(--text-color);
+}
+@media only screen and (max-width: 390px) {
+  header {
+    padding-left: 0;
+    padding-right: 0;
+    flex-wrap: nowrap;
+    box-sizing: content-box;
+  }
+  .login {
+    padding: 0.4em;
+    font-size: 0.8em;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .sign-up {
+    font-size: 0.9em;
+  }
+}

@@ -1,0 +1,20 @@
+<app-modal></app-modal>
+<main class="container">
+  <section class="title">
+    <h3><span>New</span> Arrivals</h3>
+  </section>
+  <section class="card-box">
+    <article
+      class="card"
+      *ngFor="let book of books"
+      [@borrowBookAnimation]="book.status"
+    >
+      <img src="{{ book.image }}" alt="{{ book.title }}" />
+      <div class="info">
+        <h3 class="book-name" (click)="goToCurrentBook(book.isbn)">{{ book.title }}</h3>
+        <p class="book-info"></p>
+        <a class="borrow-btn" (click)="borrowBook(book)">Borrow book</a>
+      </div>
+    </article>
+  </section>
+</main>

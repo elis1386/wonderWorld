@@ -1,0 +1,52 @@
+<div class="card-body px-0 pb-2">
+  <app-create-book-modal
+    (createBook)="addNewBook($event)"
+  ></app-create-book-modal>
+
+  <div class="list-group">
+    <div
+      *ngFor="let book of books"
+      class="list-group-item d-flex align-items-center"
+    >
+      <div class="flex-shrink-0 me-3">
+        <img
+          [src]="book.image"
+          alt="Book Image"
+          class="avatar avatar-sm border-radius-lg"
+        />
+      </div>
+      <div class="flex-grow-1">
+        <h5 class="mb-1">{{ book.title }}</h5>
+        <p class="mb-1" *ngIf="book.authors.length > 0">
+          Author: {{ book.authors[0].name }}
+        </p>
+        <p
+          [ngClass]="{
+            'text-success': book.status === 'available',
+            'text-secondary': book.status === 'borrowed'
+          }"
+          class="fs-5 mb-1"
+        >
+          Status: {{ book.status }}
+        </p>
+      </div>
+      <div class="flex-shrink-0 btns">
+        <button
+          class="btn btn-outline-warning btn-update"
+          data-bs-toggle="modal"
+          data-bs-target="#updateBook"
+          (click)="selectedBook = book"
+        >
+          Update
+        </button>
+        <button class="btn btn-outline-danger" (click)="deleteBook(book.isbn)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-update-book-modal
+    [selectedBook]="selectedBook"
+    (updateBook)="updateBook($event)"
+  ></app-update-book-modal>
+</div>

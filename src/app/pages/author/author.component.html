@@ -1,0 +1,30 @@
+<section class="d-flex flex-wrap">
+  <i class="bi bi-arrow-left-square-fill arrow" routerLink="/"></i>
+  <article class="main-book px-3 py-3">
+    <img
+      src="{{ author.image }}"
+      *ngIf="author?.image"
+      class="author-img"
+      alt="photo of the place"
+    />
+  </article>
+  <article class="px-3 py-3 author-info">
+    <div class="card-body">
+      <h3 class="card-title" *ngIf="author?.name">{{ author.name }}</h3>
+      <div class="d-flex flex-column mb-2">
+        <p class="fs-5 author" *ngIf="author?.bio">
+          {{ author.bio }}
+        </p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<div *ngIf="authorBooks.length > 0">
+  <h4 class="text-center" *ngIf="author?.name">All Books by {{ author.name }}</h4>
+  <section class="d-flex gap-2 flex-2 flex-wrap book-box px-3 py-3">
+    <article *ngFor="let book of authorBooks">
+      <img  *ngIf="book?.image" src="{{ book.image }}" class="author-books" alt="same series book" />
+    </article>
+  </section>
+</div>

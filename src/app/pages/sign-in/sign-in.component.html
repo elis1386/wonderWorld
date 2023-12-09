@@ -1,0 +1,43 @@
+<section class="form-signin">
+    <form class="form"  [formGroup]="loginForm" (ngSubmit)="signIn()">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+      <article class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="email"
+        />
+        <label for="floatingInput">Email address</label>
+        <p
+        *ngIf="
+          this.loginForm.get('email')?.invalid &&
+          this.loginForm.get('email')?.touched
+        "
+      >
+        <small class="text-danger">email is required.</small>
+      </p>
+      </article>
+      <article class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <label for="floatingPassword">Password</label>
+        <p
+        *ngIf="
+          this.loginForm.get('password')?.invalid &&
+          this.loginForm.get('password')?.touched
+        "
+      >
+        <small class="text-danger">password is required.</small>
+      </p>
+      </article>
+      <button class="btn submit w-100 py-2" type="submit">Sign in</button>
+    </form>
+  </section>
