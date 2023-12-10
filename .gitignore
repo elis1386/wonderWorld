@@ -49,3 +49,7 @@ Makefile
 
 #data
 data.ts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

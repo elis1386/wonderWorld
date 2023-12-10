@@ -55,6 +55,7 @@ figure {
     content: "W";
     font-size: 32px;
     color: var(--primary-accent-color);
+    margin-right: 0.4em;
   }
 }
 
@@ -71,6 +72,12 @@ figure {
   .login {
     padding: 0.4em;
     font-size: 0.8em;
+  }
+  .logo::before {
+    content: "W";
+    font-size: 32px;
+    color: var(--primary-accent-color);
+    margin-right: 0.4em;
   }
 }
 @media only screen and (max-width: 375px) {
