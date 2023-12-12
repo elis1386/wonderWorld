@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from 'src/models/user';
 import { ConfigService } from './config.service';
@@ -18,6 +18,10 @@ export class AuthService {
   token$ = this.tokenSubject.asObservable();
 
   constructor(private http: HttpClient, private config: ConfigService) {
+    this.initializeUserAndToken();
+  }
+
+  private initializeUserAndToken(): void {
     const storedUser = localStorage.getItem('loggedInUser');
     this.loggedUser = storedUser ? JSON.parse(storedUser) : null;
     this.user.next(this.loggedUser);
@@ -38,7 +42,8 @@ export class AuthService {
           localStorage.setItem('loggedInUser', JSON.stringify(user));
           this.loggedUser = user;
           this.user.next(this.loggedUser);
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -56,7 +61,8 @@ export class AuthService {
           const accessToken = authResponse.data.accessToken;
           localStorage.setItem('accessToken', accessToken);
           this.tokenSubject.next(accessToken);
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -74,7 +80,8 @@ export class AuthService {
           );
           this.loggedUser = currentUser.data;
           this.user.next(this.loggedUser);
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -95,7 +102,8 @@ export class AuthService {
             this.user.next(this.loggedUser);
           }
         }),
-        map((currentUserResponse) => currentUserResponse.data)
+        map((currentUserResponse) => currentUserResponse.data),
+        catchError(this.handleError)
       );
   }
 
@@ -106,5 +114,10 @@ export class AuthService {
     this.user.next(this.loggedUser);
     this.tokenSubject.next(null);
     this.user.complete();
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<any> {
+    console.error('HTTP request error:', error);
+    return of(null);
   }
 }

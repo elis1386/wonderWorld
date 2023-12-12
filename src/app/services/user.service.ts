@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 import { ConfigService } from './config.service';
 import { AuthService } from './auth.service';
@@ -19,7 +19,7 @@ export class UserService {
   ) {}
 
   borrowBooks(userId: string, bookIds: string): Observable<any> {
-    const requestBody = { _id: bookIds }; // Create the expected structure
+    const requestBody = { _id: bookIds };
     return this.authService.token$.pipe(
       switchMap((token) => {
         const headers = {
@@ -29,6 +29,8 @@ export class UserService {
           `${this.config.base_url}/users/${userId}/borrow`,
           requestBody,
           { headers }
+        ).pipe(
+          catchError(this.handleError('Error borrowing books', {}))
         );
       })
     );
@@ -45,8 +47,17 @@ export class UserService {
           `${this.config.base_url}/users/${userId}/return`,
           { ...requestBody[0] },
           { headers }
+        ).pipe(
+          catchError(this.handleError('Error returning books', {}))
         );
       })
     );
+  }
+
+  private handleError<T>(errorMessage: string, result: T): (error: HttpErrorResponse) => Observable<T> {
+    return (error: HttpErrorResponse): Observable<T> => {
+      console.error(errorMessage, error);
+      return of(result);
+    };
   }
 }

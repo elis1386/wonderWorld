@@ -49,5 +49,5 @@ This project revolves around the creation of an Libarary system using Angular fo
 ### Screenshots
 
 ![Homepage](src/assets/homepage.png),
-![User Account Management](src/assets/admin.png),
-![Admin Panel](src/assets/user.png)
+![Admin Panel](src/assets/admin.png),
+![User Account Management](src/assets/user.png)

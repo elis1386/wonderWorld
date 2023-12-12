@@ -7,5 +7,5 @@ export class ConfigService {
 
   constructor() { }
 
-  base_url: string = 'http://localhost:1337/api/v1';
+  base_url: string = 'https://api-r3paoizkka-uc.a.run.app/api/v1';
 }
