@@ -12,6 +12,7 @@ import { User } from 'src/models/user';
 export class SignInComponent {
   loginForm: FormGroup;
   currentUser?: User;
+  signInError: string | null = null;
 
   constructor(
     public authService: AuthService,
@@ -28,6 +29,7 @@ export class SignInComponent {
     if (this.loginForm.invalid) {
       return this.loginForm.markAllAsTouched();
     }
+
     this.authService
       .getAndStoreToken(
         this.loginForm.value.email,
@@ -44,7 +46,18 @@ export class SignInComponent {
                 this.router.navigate(['/user']);
               }
             },
+            error: (err) => {
+              this.signInError = 'Invalid email or password. Please try again.';
+            },
           });
+        },
+        error: (err) => {
+          if (err.status === 403) {
+            this.signInError = 'Invalid email or password. Please try again.';
+          } else {
+            this.signInError =
+              'An error occurred during sign-in. Please try again later.';
+          }
         },
       });
   }

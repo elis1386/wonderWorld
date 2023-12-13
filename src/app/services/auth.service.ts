@@ -1,15 +1,15 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { catchError, map, tap } from "rxjs/operators";
 
-import { User } from 'src/models/user';
-import { ConfigService } from './config.service';
-import { ApiResponseWrapper, JWTTokenPair } from 'src/models/api';
+import { User } from "src/models/user";
+import { ConfigService } from "./config.service";
+import { ApiResponseWrapper, JWTTokenPair } from "src/models/api";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   loggedUser: User | null = null;
@@ -22,10 +22,10 @@ export class AuthService {
   }
 
   private initializeUserAndToken(): void {
-    const storedUser = localStorage.getItem('loggedInUser');
+    const storedUser = localStorage.getItem("loggedInUser");
     this.loggedUser = storedUser ? JSON.parse(storedUser) : null;
     this.user.next(this.loggedUser);
-    const storedToken = localStorage.getItem('accessToken');
+    const storedToken = localStorage.getItem("accessToken");
     this.tokenSubject.next(storedToken);
   }
 
@@ -38,8 +38,8 @@ export class AuthService {
       .pipe(
         tap((authResponse) => {
           const accessToken = authResponse.data.accessToken;
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
           this.loggedUser = user;
           this.user.next(this.loggedUser);
         }),
@@ -59,7 +59,7 @@ export class AuthService {
       .pipe(
         tap((authResponse) => {
           const accessToken = authResponse.data.accessToken;
-          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem("accessToken", accessToken);
           this.tokenSubject.next(accessToken);
         }),
         catchError(this.handleError)
@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   getAndStoreUser(): Observable<ApiResponseWrapper<User>> {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
     return this.http
       .get<ApiResponseWrapper<User>>(`${this.config.base_url}/auth/me`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -75,7 +75,7 @@ export class AuthService {
       .pipe(
         tap((currentUser) => {
           localStorage.setItem(
-            'loggedInUser',
+            "loggedInUser",
             JSON.stringify(currentUser.data)
           );
           this.loggedUser = currentUser.data;
@@ -86,7 +86,7 @@ export class AuthService {
   }
 
   getCurrentUser(): Observable<User> {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
     return this.http
       .get<ApiResponseWrapper<User>>(`${this.config.base_url}/auth/me`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -95,7 +95,7 @@ export class AuthService {
         tap((currentUserResponse) => {
           if (currentUserResponse) {
             localStorage.setItem(
-              'loggedInUser',
+              "loggedInUser",
               JSON.stringify(currentUserResponse.data)
             );
             this.loggedUser = currentUserResponse.data;
@@ -108,8 +108,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("loggedInUser");
     this.loggedUser = null;
     this.user.next(this.loggedUser);
     this.tokenSubject.next(null);
@@ -117,7 +117,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
-    console.error('HTTP request error:', error);
-    return of(null);
+    console.error("HTTP request error:", error);
+    throw error;
   }
 }

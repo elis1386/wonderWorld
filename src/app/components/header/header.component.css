@@ -62,7 +62,7 @@ figure {
 .logo:hover {
   color: var(--text-color);
 }
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 425px) {
   header {
     padding-left: 0;
     padding-right: 0;
@@ -82,6 +82,11 @@ figure {
 }
 @media only screen and (max-width: 375px) {
   .sign-up {
-    font-size: 0.9em;
+    font-size: 0.6em;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .search {
+    display: none;
   }
 }

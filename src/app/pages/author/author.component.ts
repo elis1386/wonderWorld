@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 import { AuthorService } from 'src/app/services/author.service';
 import { Author } from 'src/models/author';
@@ -18,7 +20,8 @@ export class AuthorComponent implements OnInit {
 
   constructor(
     private authorService: AuthorService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -39,5 +42,8 @@ export class AuthorComponent implements OnInit {
     this.authorService.getAuthorsBooks(this.authorId).subscribe((response) => {
       this.authorBooks = response.data?.books;
     });
+  }
+  goToPreviousPageWithBook(): void {
+    this.location.back()
   }
 }

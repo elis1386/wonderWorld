@@ -31,8 +31,8 @@ This project revolves around the creation of an Libarary system using Angular fo
 
 ## Deploy
 
-- front-end deploy on Firebase []
-- back-end deploy on Amazon []
+- front-end deploy on Firebase Hosting [https://wonderworld-2a0e3.firebaseapp.com/]
+- back-end deploy on Firebase Functions [https://api-r3paoizkka-uc.a.run.app/api/v1/books]
 
 
 ### Getting Started
@@ -43,9 +43,12 @@ This project revolves around the creation of an Libarary system using Angular fo
    ng serve
 3. Install dependencies back end project:
    pnpm install
-4. Run the back end project 
+4. Run the back end project: 
    npm run dev
-   
+5. Run e2e tests:
+   npx playwright test --headed  (--headed allow to see all tests in browser and also going step by step into test)
+6. Run jasmin/karma:
+   tests ng test --code-coverage
 ### Screenshots
 
 ![Homepage](src/assets/homepage.png),
