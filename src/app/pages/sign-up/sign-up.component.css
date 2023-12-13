@@ -1,33 +1,30 @@
 .form-signUp {
-    width: 35%;
-    margin: 4rem auto;
+  width: 35%;
+  margin: 4rem auto;
+  height: 500px;
+}
+.btn {
+  background-color: var(--secondary-accent-color);
+  color: white;
+}
+.form-check-input:checked {
+  background-color: var(--signUp-btn);
+}
+
+@media only screen and (max-width: 768px) {
+  .form-signUp  {
+    width: 60%;
     height: 500px;
+    margin: 10rem auto;
   }
-  .btn {
-    background-color: var(--secondary-accent-color);
-    color: white;
+}
+
+@media only screen and (max-width: 425px) {
+  .form-signUp {
+    width: 90%;
   }
-  .form-check-input:checked {
-    background-color: var(--signUp-btn);
+  .createUser{
+    margin-top: 4rem;
   }
-  
-  @media only screen and (max-width: 768px) {
-    .form-signin {
-      width: 60%;
-      height: 500px;
-      margin: 10rem auto;
-    }
-  }
-  
-  @media only screen and (max-width: 425px) {
-    .form-signin {
-      width: 90%;
-    }
-    .banklogin {
-      font-size: 1rem;
-    }
-    .createUser{
-      margin-top: 4rem;
-    }
-  }
+}
 
