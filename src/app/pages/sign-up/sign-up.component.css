@@ -15,16 +15,12 @@
   .form-signUp  {
     width: 60%;
     height: 500px;
-    margin: 10rem auto;
   }
 }
 
 @media only screen and (max-width: 425px) {
   .form-signUp {
     width: 90%;
-  }
-  .createUser{
-    margin-top: 4rem;
   }
 }
 

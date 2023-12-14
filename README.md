@@ -1,56 +1,89 @@
-# Library for children "WonderWorl"
+# WonderWorl Children's Library System - README
 
-This project revolves around the creation of an Libarary system using Angular for the frontend and interactions with an equivalent backend service.
+Welcome to WonderWorl Children's Library System! This project is designed to provide a comprehensive library system for managing books, user accounts, and administrative tasks. Below, you'll find information on how to set up, deploy, and run the system, along with additional features and prerequisites.
 
-- Frontend: TypeScript, Angular 16, Bootstrap, CSS.
-- Backend: Node.js(ExpressJS), MongoDB, Postman.
+## Table of Contents
 
-### 1. Core features
+1.  [Core Features](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#1-core-features)
+2.  [Additional Features](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#2-additional-features)
+3.  [Prerequisites](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#prerequisites)
+4.  [Deploy](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#deploy)
+5.  [Getting Started](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#getting-started)
+6.  [Screenshots](https://chat.openai.com/c/9e0c0392-59e5-43fb-8511-7b5d1abe0df2#screenshots)
 
-- Guest Functionalities:
-  - Books browsing: explore all available books, view books details, search, sort.
-  - User account Management: Borrow book to the user, check all borrowed book, and return it back(remove from account).
-- User Functionalities
-  - User Management: Sign up, log in, and log out. Users have no access to admin panel.
-- Admin Functionalities
-  - Product Management: View all books from DB, add new book, update existing books, and delete books.
+## 1. Core Features
 
-### 2. Additional features
+### Guest Functionalities:
 
-- Related books by the same author(in the book page user also can see the dsame author's book)
-- Author page with all books by author
-- Add e2e tests using playwright testing (for sign in / sign up / borrow book)
-- Add unit testing jasmin/karma (services)
+- **Browse Books:**
+
+  - Explore all available books.
+  - View book details.
+  - Search and sort books.
+
+- **User Account Management:**
+
+  - Borrow books.
+  - Check borrowed books.
+  - Return books (remove from account).
+
+### User Functionalities:
+
+- **User Management:**
+  - Sign up, log in, and log out.
+  - Users have no access to the admin panel.
+
+### Admin Functionalities:
+
+- **Product Management:**
+  - View all books from the database.
+  - Add new books.
+  - Update existing books.
+  - Delete books.
+
+## 2. Additional Features
+
+-   Users can see other books by the same author on the book page.
+-   Displays all books by a specific author.
+-   Implemented using Playwright for sign-in, sign-up, and book borrowing.
+-   Jasmine/Karma used for testing services.
 
 ## Prerequisites
 
 - Implement routing and guards to protect certain routes.
-- Use angular animation for borrowe book effects
-- Properly handle errors, alerts and modal windows for wrong scenario.
-- Maintain a well-organized directory structure and naming convention in line with Angular best practices.
+- Utilize Angular animations for book borrowing effects.
+- Handle errors, alerts, and modal windows for various scenarios.
+- Maintain a well-organized directory structure and adhere to Angular best practices.
 
 ## Deploy
 
-- front-end deploy on Firebase Hosting [https://wonderworld-2a0e3.firebaseapp.com/]
-- back-end deploy on Firebase Functions [https://api-r3paoizkka-uc.a.run.app/api/v1/books]
-
+- Front-end deployed on Firebase Hosting: [[https://wonderworld-2a0e3.firebaseapp.com/](https://wonderworld-2a0e3.firebaseapp.com/)]
+- Back-end deployed on Firebase Functions: [[https://api-r3paoizkka-uc.a.run.app/api/v1/books](https://api-r3paoizkka-uc.a.run.app/api/v1/books)]
 
 ### Getting Started
 
-1. Install dependencies front end project:
+To start using the WonderWorl Children's Library System, follow these simple steps:
+
+1. **Install Frontend Dependencies:**
+   ```bash
    npm install
-2. Run the front end project 
+
+2. **Run the front end project:**
+   ```bash  
    ng serve
-3. Install dependencies back end project:
-   pnpm install
-4. Run the back end project: 
-   npm run dev
-5. Run e2e tests:
-   npx playwright test --headed  (--headed allow to see all tests in browser and also going step by step into test)
-6. Run jasmin/karma:
-   tests ng test --code-coverage
+
+3. **Run e2e tests:**
+   ```bash  
+   npx playwright test --headed 
+
+4. **Run jasmin/karma:**
+   ```bash  
+   tests ng test
+
 ### Screenshots
 
 ![Homepage](src/assets/homepage.png),
+
 ![Admin Panel](src/assets/admin.png),
+
 ![User Account Management](src/assets/user.png)
