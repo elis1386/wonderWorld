@@ -8,13 +8,18 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthorComponent } from './pages/author/author.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'book/:isbn', component: BookComponent },
-  { path: 'admin', component: AdminProfileComponent },
+  {
+    path: 'admin',
+    component: AdminProfileComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'user', component: UserProfileComponent },
   { path: 'authors/:id', component: AuthorComponent },
 ];

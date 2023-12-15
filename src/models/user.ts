@@ -6,5 +6,5 @@ export interface User {
   password: string;
   role: string;
   image: string;
-  borrowedBooks: [string]
+  borrowedBooks: string[]
 }
