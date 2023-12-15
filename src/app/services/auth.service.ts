@@ -116,7 +116,7 @@ export class AuthService {
     this.user.complete();
   }
   isAdmin(): boolean {
-    return !!this.loggedUser && this.loggedUser.role === 'admin';
+    return !!this.loggedUser && this.loggedUser.role === 'ADMIN';
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
