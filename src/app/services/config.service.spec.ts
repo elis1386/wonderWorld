@@ -17,7 +17,7 @@ describe('ConfigService', () => {
   });
 
   it('should have a default base_url', () => {
-    expect(service.base_url).toBe('http://localhost:1337/api/v1');
+    expect(service.base_url).toBe('https://api-r3paoizkka-uc.a.run.app/api/v1');
   });
 
 });

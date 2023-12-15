@@ -8,6 +8,7 @@ describe('AuthService', () => {
   let service: AuthService;
   let httpTestingController: HttpTestingController;
   let config: ConfigService;
+  let fakeUserForSignUp: { returnValue: () => User };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,6 +19,15 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
     httpTestingController = TestBed.inject(HttpTestingController);
     config = TestBed.inject(ConfigService);
+
+    fakeUserForSignUp = {
+      returnValue: () => ({
+        firstName: 'testfirstname',
+        lastName: 'testlastname',
+        email: 'test@example.com',
+        password: 'password123',
+      } as User),
+    };
   });
 
   afterEach(() => {
@@ -29,22 +39,12 @@ describe('AuthService', () => {
   });
 
   it('should sign up a user', fakeAsync(() => {
-    const user: User = {
-      firstName: 'testfirstname',
-      lastName: 'testlastname',
-      email: 'test@example.com',
-      password: 'password123',
-      _id: '',
-      role: '',
-      image: '',
-      borrowedBooks: [''],
-    };
-
+    const user = fakeUserForSignUp.returnValue();
     const signUpResponse = { data: { accessToken: 'fakeAccessToken' }, status: 'success' };
+    let response: any;
 
-    service.signUp(user).subscribe((response) => {
-      expect(response).toEqual(signUpResponse);
-      expect(service.loggedUser).toEqual(user);
+    service.signUp(user).subscribe((res) => {
+      response = res;
     });
 
     const req = httpTestingController.expectOne(`${config.base_url}/auth/signup`);
@@ -53,6 +53,8 @@ describe('AuthService', () => {
 
     tick();
 
+    expect(response).toEqual(signUpResponse);
+    expect(service.loggedUser).toEqual(user);
     expect(localStorage.getItem('accessToken')).toBe('fakeAccessToken');
     expect(localStorage.getItem('loggedInUser')).toEqual(JSON.stringify(user));
   }));
@@ -60,11 +62,12 @@ describe('AuthService', () => {
   it('should get and store token', fakeAsync(() => {
     const email = 'test@example.com';
     const password = 'password123';
-
     const loginResponse = { data: { accessToken: 'fakeAccessToken' }, status: 'success' };
 
-    service.getAndStoreToken(email, password).subscribe((response) => {
-      return expect(response).toEqual(loginResponse);
+    let response: any;
+
+    service.getAndStoreToken(email, password).subscribe((res) => {
+      response = res;
     });
 
     const req = httpTestingController.expectOne(`${config.base_url}/auth/login`);
@@ -73,6 +76,7 @@ describe('AuthService', () => {
 
     tick();
 
+    expect(response).toEqual(loginResponse);
     expect(service.tokenSubject.value).toBe('fakeAccessToken');
     expect(localStorage.getItem('accessToken')).toBe('fakeAccessToken');
   }));
@@ -90,10 +94,10 @@ describe('AuthService', () => {
     };
 
     const getUserResponse = { data: user, status: 'success' };
+    let response: any;
 
-    service.getAndStoreUser().subscribe((response) => {
-      expect(response).toEqual(getUserResponse);
-      expect(service.loggedUser).toEqual(user);
+    service.getAndStoreUser().subscribe((res) => {
+      response = res;
     });
 
     const req = httpTestingController.expectOne(`${config.base_url}/auth/me`);
@@ -102,6 +106,8 @@ describe('AuthService', () => {
 
     tick();
 
+    expect(response).toEqual(getUserResponse);
+    expect(service.loggedUser).toEqual(user);
     expect(localStorage.getItem('loggedInUser')).toEqual(JSON.stringify(user));
   }));
 
@@ -118,10 +124,10 @@ describe('AuthService', () => {
     };
 
     const getCurrentUserResponse = { data: user, status: 'success' };
+    let response: any;
 
-    service.getCurrentUser().subscribe((response) => {
-      expect(response).toEqual(user);
-      expect(service.loggedUser).toEqual(user);
+    service.getCurrentUser().subscribe((res) => {
+      response = res;
     });
 
     const req = httpTestingController.expectOne(`${config.base_url}/auth/me`);
@@ -130,6 +136,8 @@ describe('AuthService', () => {
 
     tick();
 
+    expect(response).toEqual(user);
+    expect(service.loggedUser).toEqual(user);
     expect(localStorage.getItem('loggedInUser')).toEqual(JSON.stringify(user));
   }));
 
