@@ -43,10 +43,6 @@ testem.log
 Thumbs.db
 
 
-#Makefile
-Makefile
-
-
 #data
 data.ts
 /test-results/
