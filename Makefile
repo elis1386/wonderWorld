@@ -8,8 +8,4 @@ dist: node_modules $(TS_FILES)
 
 .PHONY: unit-tests
 unit-tests: node_modules $(TS_FILES)
-ifdef CI
 	ng test --watch=false --browsers=Chrome_no_sandbox	
-else
-	ng test
-endif
