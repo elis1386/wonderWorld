@@ -1,0 +1,18 @@
+FROM node:lts-slim
+
+LABEL maintainer="elis1386@gmail.com"
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+RUN npm install -g @angular/cli
+
+WORKDIR /app
+COPY . .
+RUN pnpm install
+RUN ng build
+
+ENTRYPOINT [ "npx" ]
+CMD [ "http-server", "dist/library"] 
+EXPOSE 8080
