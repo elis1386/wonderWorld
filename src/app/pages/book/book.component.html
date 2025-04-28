@@ -1,30 +1,21 @@
 <section class="box">
   <i class="bi bi-arrow-left-square-fill arrow" routerLink="/"></i>
-  <article
-    class="main-book px-3 py-3"
-    *ngIf="book?.status"
-    [@borrowBookAnimation]="book.status"
-  >
-    <img
-      src="{{ book.image }}"
-      class="main-book-img"
-      alt="photo of the place"
-    />
+  <article class="main-book px-3 py-3" *ngIf="book?.status" [@borrowBookAnimation]="book.status">
+    <img src="{{ book.image }}" class="main-book-img" alt="photo of the place" />
   </article>
   <article class="px-3 mb-3">
     <div class="card-body">
       <h3 class="card-title" *ngIf="book?.title">{{ book.title }}</h3>
       <div class="d-flex flex-column mb-2">
         <p class="mb-2 mt-2">Ikä: 9-12 vuosi</p>
-        <a class="fs-4 author" *ngIf="book?.authors" (click)="goToAuthorPage()">{{
-          book.authors[0].name!
-        }} </a>
+        <a class="fs-4 author" *ngIf="book?.authors" (click)="goToAuthorPage()">{{ book.authors[0].name! }} </a>
       </div>
       <button
+        data-cy="button-borrow-book"
         class="btn borrow-btn mt-2 mb-4"
         *ngIf="book?.status"
         [ngClass]="{
-          disabled: book.status === 'borrowed'
+          disabled: book.status === 'borrowed',
         }"
         (click)="borrowBook(book)"
       >
@@ -35,4 +26,3 @@
   </article>
 </section>
 <app-modal></app-modal>
-

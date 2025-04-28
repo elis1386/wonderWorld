@@ -9,17 +9,14 @@
         id="floatingInput"
         placeholder="name@example.com"
         formControlName="email"
+        data-cy="input-login-email"
       />
       <label for="floatingInput">Email address</label>
-      <p
-        *ngIf="
-          this.loginForm.get('email')?.invalid &&
-          this.loginForm.get('email')?.touched
-        "
-      >
+      <p *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
         <small class="text-danger">Email is required.</small>
       </p>
     </article>
+
     <article class="form-floating">
       <input
         type="password"
@@ -27,18 +24,15 @@
         id="floatingPassword"
         placeholder="Password"
         formControlName="password"
+        data-cy="input-login-password"
       />
       <label for="floatingPassword">Password</label>
-      <p
-        *ngIf="
-          this.loginForm.get('password')?.invalid &&
-          this.loginForm.get('password')?.touched
-        "
-      >
+      <p *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
         <small class="text-danger">Password is required.</small>
       </p>
     </article>
-    <button class="btn submit w-100 py-2" type="submit">Sign in</button>
+
+    <button class="btn submit w-100 py-2" type="submit" data-cy="submit-login">Sign in</button>
   </form>
 
   <div *ngIf="signInError" class="alert alert-danger mt-3">

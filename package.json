@@ -29,6 +29,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.16",
     "@angular/cli": "^17.3.16",
+    "@angular/compiler-cli": "17.3.12",
     "@playwright/test": "^1.52.0",
     "@types/jasmine": "~5.1.7",
     "@types/node": "^22.15.3",
@@ -40,6 +41,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.4.5"
   }
 }
