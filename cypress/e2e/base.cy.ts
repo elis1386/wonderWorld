@@ -50,8 +50,8 @@ describe("User Sign in", () => {
     cy.wait(2000);
 
     // logout
-    cy.get(".d-block").click();
-    cy.get(":nth-child(3) > .dropdown-item").click();
+    cy.get('[data-cy="user-menu-button"]').click();
+    cy.get('[data-cy="logout-button"]').click();
     cy.url().should("include", "/");
   });
 });
@@ -59,7 +59,7 @@ describe("Borrow book", () => {
   const userPassword = "Alexia1234";
   const userEmail = "alexia@aalto.com";
 
-  it.only("sign in and borrow book", () => {
+  it("sign in and borrow book", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
 
     // Click to Sign Up
@@ -74,7 +74,7 @@ describe("Borrow book", () => {
 
     cy.get(".logo").click();
     cy.wait(2000);
-    cy.get("app-new-arrive.ng-tns-c11-2 > .container > .card-box > :nth-child(1) > .info > .book-name").click();
+    cy.get('[data-cy="new-arrival-first-book"] > :nth-child(1)').click();
     cy.get('[data-cy="button-borrow-book"]').click();
     cy.get('[data-cy="button-borrow-book"]').should("have.class", "disabled");
   });
@@ -90,10 +90,10 @@ describe("Return book", () => {
     cy.get(".login").click();
 
     //Fillout the registration form
-    cy.get(":nth-child(2) > .form-control").type(userEmail); // email
-    cy.get(":nth-child(3) > .form-control").type(userPassword); // password
+    cy.get('[data-cy="input-login-email"]').type(userEmail); // email
+    cy.get('[data-cy="input-login-password"]').type(userPassword); // password
 
-    cy.get(".w-100").click();
+    cy.get('[data-cy="submit-login"]').click();
     cy.url().should("include", "/user");
     cy.get(".btn").contains("Return Book").click();
     cy.contains("You have no books yet. Please go to the main page and add books.").should("be.visible");

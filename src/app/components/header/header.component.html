@@ -4,42 +4,22 @@
   </figure>
   <app-search-bar class="col-md-4 col-lg-6 search"></app-search-bar>
   <article class="text-end d-flex">
-    <button
-      *ngIf="!(user | async)"
-      type="button"
-      class="btn login me-2"
-      (click)="navigateToSignIn()"
-    >
-      Sign in
-    </button>
+    <button *ngIf="!(user | async)" type="button" class="btn login me-2" (click)="navigateToSignIn()">Sign in</button>
 
-    <button
-      *ngIf="!(user | async)"
-      type="button"
-      class="btn sign-up"
-      (click)="navigateToSignUp()"
-    >
-      Sign-up
-    </button>
+    <button *ngIf="!(user | async)" type="button" class="btn sign-up" (click)="navigateToSignUp()">Sign-up</button>
   </article>
-  <article *ngIf="user | async" class="dropdown text-end">
-    <a
-      class="d-block link-dark text-decoration-none dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
+  <article *ngIf="user | async" class="dropdown text-end" data-cy="user-menu-button">
+    <a class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="bi bi-person-circle"></i>
     </a>
     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
       <li class="d-flex align-center justify-content-center py-2 px-2">
-        <img [src]="currentUser?.image" class="rounded" alt="">
-        <p class="dropdown-item text-center m-0" [routerLink]="getProfileLink()">
-          Hello, {{ currentUser?.firstName }}
-        </p>
+        <img [src]="currentUser?.image" class="rounded" alt="" />
+        <p class="dropdown-item text-center m-0" [routerLink]="getProfileLink()">Hello, {{ currentUser?.firstName }}</p>
       </li>
       <li><hr class="dropdown-divider" /></li>
       <li>
-        <a class="dropdown-item" (click)="logout()"> Sign out </a>
+        <a class="dropdown-item" data-cy="logout-button" (click)="logout()"> Sign out </a>
       </li>
     </ul>
   </article>
