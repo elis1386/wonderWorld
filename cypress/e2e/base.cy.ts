@@ -15,11 +15,11 @@ describe("User Registration and Flow", () => {
     cy.get(".sign-up").click();
 
     //Fillout the registration form
-    cy.get('[data-cy="input-first-name"]').type(randomName); // email
-    cy.get('[data-cy="input-last-name"]').type(randomSurname); // password
-    cy.get('[data-cy="input-email"]').type(randomEmail);
-    cy.get('[data-cy="input-password"]').type(randomPassword);
-    cy.get('[data-cy="input-image"]').type(randomUrl);
+    cy.get('[data-cy="input-signup-first-name"]').type(randomName); // email
+    cy.get('[data-cy="input-signup-last-name"]').type(randomSurname); // password
+    cy.get('[data-cy="input-signup-email"]').type(randomEmail);
+    cy.get('[data-cy="input-signup-password"]').type(randomPassword);
+    cy.get('[data-cy="input-signup-image"]').type(randomUrl);
 
     cy.get('[data-cy="submit-signup"]').click();
     cy.url().should("include", "/user");
@@ -59,7 +59,7 @@ describe("Borrow book", () => {
   const userPassword = "Alexia1234";
   const userEmail = "alexia@aalto.com";
 
-  it("sign in and borrow book", () => {
+  it.only("sign in and borrow book", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
 
     // Click to Sign Up

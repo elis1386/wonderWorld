@@ -3,12 +3,8 @@
   <section class="title">
     <h3><span>New</span> Arrivals</h3>
   </section>
-  <section class="card-box">
-    <article
-      class="card"
-      *ngFor="let book of books"
-      [@borrowBookAnimation]="book.status"
-    >
+  <section class="card-box" data-cy="new-arrival-first-book">
+    <article class="card" *ngFor="let book of books" [@borrowBookAnimation]="book.status">
       <img src="{{ book.image }}" alt="{{ book.title }}" />
       <div class="info">
         <h3 class="book-name" (click)="goToCurrentBook(book.isbn)">{{ book.title }}</h3>
