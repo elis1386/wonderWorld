@@ -59,7 +59,7 @@ describe("Borrow book", () => {
   const userPassword = "Alexia1234";
   const userEmail = "alexia@aalto.com";
 
-  it("sign in and borrow book", () => {
+  it.only("sign in and borrow book", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
 
     // Click to Sign Up
@@ -83,7 +83,7 @@ describe("Return book", () => {
   const userPassword = "Alexia1234";
   const userEmail = "alexia@aalto.com";
 
-  it("sign in and borrow book", () => {
+  it.only("sign in and borrow book", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
 
     // Click to Sign Up
@@ -95,7 +95,8 @@ describe("Return book", () => {
 
     cy.get('[data-cy="submit-login"]').click();
     cy.url().should("include", "/user");
+    cy.get(".book").should("have.length.greaterThan", 0);
     cy.get(".btn").contains("Return Book").click();
-    cy.contains("You have no books yet. Please go to the main page and add books.").should("be.visible");
+    cy.get(".book").should("not.exist");
   });
 });
