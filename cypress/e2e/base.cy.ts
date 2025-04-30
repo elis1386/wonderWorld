@@ -1,22 +1,22 @@
 /// <reference types="cypress" />
 import { faker } from "@faker-js/faker";
 
-describe("User Registration and Flow", () => {
-  const randomPassword = faker.internet.password();
-  const randomEmail = faker.internet.email();
-  const randomName = faker.internet.userName();
-  const randomSurname = faker.person.lastName();
-  const randomUrl = faker.internet.url();
+const userEmail = "alexia@aalto.com";
+const userPassword = "Alexia1234";
 
-  it("should sign up, sign in, logout and interact with book", () => {
+const randomPassword = faker.internet.password();
+const randomEmail = faker.internet.email();
+const randomName = faker.internet.userName();
+const randomSurname = faker.person.lastName();
+const randomUrl = faker.internet.url();
+
+describe("User Registration", () => {
+  it("should sign up and logout", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
-
-    // Click to Sign Up
     cy.get(".sign-up").click();
 
-    //Fillout the registration form
-    cy.get('[data-cy="input-signup-first-name"]').type(randomName); // email
-    cy.get('[data-cy="input-signup-last-name"]').type(randomSurname); // password
+    cy.get('[data-cy="input-signup-first-name"]').type(randomName);
+    cy.get('[data-cy="input-signup-last-name"]').type(randomSurname);
     cy.get('[data-cy="input-signup-email"]').type(randomEmail);
     cy.get('[data-cy="input-signup-password"]').type(randomPassword);
     cy.get('[data-cy="input-signup-image"]').type(randomUrl);
@@ -29,47 +29,72 @@ describe("User Registration and Flow", () => {
     cy.get(":nth-child(3) > .dropdown-item").click();
     cy.url().should("include", "/");
   });
-});
-describe("User Sign in", () => {
-  const userPassword = "Alexia1234";
-  const userEmail = "alexia@aalto.com";
 
-  it("sign in, logout and interact with book", () => {
+  it("should not sign up", () => {
     cy.visit("https://wonderworld-2a0e3.web.app/");
+    cy.get(".sign-up").click();
 
-    // Click to Sign Up
-    cy.get(".login").click();
+    cy.get('[data-cy="input-signup-first-name"]').type(randomName);
+    cy.get('[data-cy="input-signup-last-name"]').type(randomSurname);
+    cy.get('[data-cy="input-signup-email"]').type(randomSurname);
+    cy.get('[data-cy="input-signup-password"]').type(randomPassword);
+    cy.get('[data-cy="input-signup-image"]').type(randomUrl);
 
-    //Fillout the registration form
-    cy.get('[data-cy="input-login-email"]').type(userEmail); // email
-    cy.get('[data-cy="input-login-password"]').type(userPassword); // password
-
-    cy.get('[data-cy="submit-login"]').click();
-    cy.url().should("include", "/user");
-
-    cy.wait(2000);
-
-    // logout
-    cy.get('[data-cy="user-menu-button"]').click();
-    cy.get('[data-cy="logout-button"]').click();
-    cy.url().should("include", "/");
+    cy.get('[data-cy="submit-signup"]').click();
+    cy.contains("Email is required.").should("be.visible");
   });
 });
+
+describe("User Sign in", () => {
+  context("Positive case", () => {
+    beforeEach(() => {
+      cy.login(userEmail, userPassword);
+    });
+
+    it("should login and logout", () => {
+      cy.url().should("include", "/user");
+      cy.get('[data-cy="user-menu-button"]').click();
+      cy.get('[data-cy="logout-button"]').click();
+      cy.url().should("include", "/");
+    });
+  });
+
+  context("Negative cases", () => {
+    it("should show error when email is missing", () => {
+      cy.visit("https://wonderworld-2a0e3.web.app/");
+      cy.get(".login").click();
+      cy.get('[data-cy="input-login-email"]').clear();
+      cy.get('[data-cy="input-login-password"]').type(userPassword);
+      cy.get('[data-cy="submit-login"]').click();
+      cy.contains("Email is required.").should("be.visible");
+    });
+
+    it("should show error for invalid email format", () => {
+      cy.visit("https://wonderworld-2a0e3.web.app/");
+      cy.get(".login").click();
+      cy.get('[data-cy="input-login-email"]').type("invalid-email");
+      cy.get('[data-cy="input-login-password"]').type(userPassword);
+      cy.get('[data-cy="submit-login"]').click();
+      cy.contains("Email is required.").should("be.visible");
+    });
+
+    it("should show error when password is missing", () => {
+      cy.visit("https://wonderworld-2a0e3.web.app/");
+      cy.get(".login").click();
+      cy.get('[data-cy="input-login-email"]').type(userEmail);
+      cy.get('[data-cy="input-login-password"]').clear();
+      cy.get('[data-cy="submit-login"]').click();
+      cy.contains("Password is required.").should("be.visible");
+    });
+  });
+});
+
 describe("Borrow book", () => {
-  const userPassword = "Alexia1234";
-  const userEmail = "alexia@aalto.com";
+  beforeEach(() => {
+    cy.login(userEmail, userPassword);
+  });
 
-  it.only("sign in and borrow book", () => {
-    cy.visit("https://wonderworld-2a0e3.web.app/");
-
-    // Click to Sign Up
-    cy.get(".login").click();
-
-    //Fillout the registration form
-    cy.get('[data-cy="input-login-email"]').type(userEmail); // email
-    cy.get('[data-cy="input-login-password"]').type(userPassword); // password
-
-    cy.get('[data-cy="submit-login"]').click();
+  it("should borrow a book", () => {
     cy.url().should("include", "/user");
 
     cy.get(".logo").click();
@@ -79,23 +104,16 @@ describe("Borrow book", () => {
     cy.get('[data-cy="button-borrow-book"]').should("have.class", "disabled");
   });
 });
+
 describe("Return book", () => {
-  const userPassword = "Alexia1234";
-  const userEmail = "alexia@aalto.com";
+  beforeEach(() => {
+    cy.login(userEmail, userPassword);
+  });
 
-  it.only("sign in and borrow book", () => {
-    cy.visit("https://wonderworld-2a0e3.web.app/");
-
-    // Click to Sign Up
-    cy.get(".login").click();
-
-    //Fillout the registration form
-    cy.get('[data-cy="input-login-email"]').type(userEmail); // email
-    cy.get('[data-cy="input-login-password"]').type(userPassword); // password
-
-    cy.get('[data-cy="submit-login"]').click();
+  it("should return a book", () => {
     cy.url().should("include", "/user");
-    cy.get(".book").should("have.length.greaterThan", 0);
+
+    cy.get('[data-cy="book"]').should("have.length.greaterThan", 0);
     cy.get(".btn").contains("Return Book").click();
     cy.get(".book").should("not.exist");
   });
