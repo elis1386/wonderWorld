@@ -1,9 +1,6 @@
 /// <reference types="cypress" />
 import { faker } from "@faker-js/faker";
 
-const userEmail = "alexia@aalto.com";
-const userPassword = "Alexia1234";
-
 const randomPassword = faker.internet.password();
 const randomEmail = faker.internet.email();
 const randomName = faker.internet.userName();
@@ -12,7 +9,7 @@ const randomUrl = faker.internet.url();
 
 describe("User Registration", () => {
   it("should sign up and logout", () => {
-    cy.visit("https://wonderworld-2a0e3.web.app/");
+    cy.visit("/");
     cy.get(".sign-up").click();
 
     cy.get('[data-cy="input-signup-first-name"]').type(randomName);
@@ -31,7 +28,7 @@ describe("User Registration", () => {
   });
 
   it("should not sign up", () => {
-    cy.visit("https://wonderworld-2a0e3.web.app/");
+    cy.visit("/");
     cy.get(".sign-up").click();
 
     cy.get('[data-cy="input-signup-first-name"]').type(randomName);
@@ -48,7 +45,7 @@ describe("User Registration", () => {
 describe("User Sign in", () => {
   context("Positive case", () => {
     beforeEach(() => {
-      cy.login(userEmail, userPassword);
+      cy.loginFromFixture();
     });
 
     it("should login and logout", () => {
@@ -61,7 +58,8 @@ describe("User Sign in", () => {
 
   context("Negative cases", () => {
     it("should show error when email is missing", () => {
-      cy.visit("https://wonderworld-2a0e3.web.app/");
+      const { userPassword } = Cypress.env("credentials");
+      cy.visit("/");
       cy.get(".login").click();
       cy.get('[data-cy="input-login-email"]').clear();
       cy.get('[data-cy="input-login-password"]').type(userPassword);
@@ -70,7 +68,8 @@ describe("User Sign in", () => {
     });
 
     it("should show error for invalid email format", () => {
-      cy.visit("https://wonderworld-2a0e3.web.app/");
+      const { userPassword } = Cypress.env("credentials");
+      cy.visit("/");
       cy.get(".login").click();
       cy.get('[data-cy="input-login-email"]').type("invalid-email");
       cy.get('[data-cy="input-login-password"]').type(userPassword);
@@ -79,7 +78,8 @@ describe("User Sign in", () => {
     });
 
     it("should show error when password is missing", () => {
-      cy.visit("https://wonderworld-2a0e3.web.app/");
+      const { userEmail } = Cypress.env("credentials");
+      cy.visit("/");
       cy.get(".login").click();
       cy.get('[data-cy="input-login-email"]').type(userEmail);
       cy.get('[data-cy="input-login-password"]').clear();
@@ -91,12 +91,11 @@ describe("User Sign in", () => {
 
 describe("Borrow book", () => {
   beforeEach(() => {
-    cy.login(userEmail, userPassword);
+    cy.loginFromFixture();
   });
 
   it("should borrow a book", () => {
     cy.url().should("include", "/user");
-
     cy.get(".logo").click();
     cy.wait(2000);
     cy.get('[data-cy="new-arrival-first-book"] > :nth-child(1)').click();
@@ -107,12 +106,11 @@ describe("Borrow book", () => {
 
 describe("Return book", () => {
   beforeEach(() => {
-    cy.login(userEmail, userPassword);
+    cy.loginFromFixture();
   });
 
   it("should return a book", () => {
     cy.url().should("include", "/user");
-
     cy.get('[data-cy="book"]').should("have.length.greaterThan", 0);
     cy.get(".btn").contains("Return Book").click();
     cy.get(".book").should("not.exist");
