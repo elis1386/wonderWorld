@@ -43,10 +43,10 @@ Welcome to WonderWorl Children's Library System! This project is designed to pro
 
 ## 2. Additional Features
 
--   Users can see other books by the same author on the book page.
--   Displays all books by a specific author.
--   Implemented using Playwright for sign-in, sign-up, and book borrowing.
--   Jasmine/Karma used for testing services.
+- Users can see other books by the same author on the book page.
+- Displays all books by a specific author.
+- Implemented using Playwright for sign-in, sign-up, and book borrowing.
+- Jasmine/Karma used for testing services.
 
 ## Prerequisites
 
@@ -64,21 +64,36 @@ Welcome to WonderWorl Children's Library System! This project is designed to pro
 
 To start using the WonderWorl Children's Library System, follow these simple steps:
 
-1. **Install Frontend Dependencies:**
-   ```bash
-   npm install
+1.  **Install Frontend Dependencies:**
 
-2. **Run the front end project:**
-   ```bash  
-   ng serve
+    ```bash
+    npm install
 
-3. **Run e2e tests:**
-   ```bash  
-   npx playwright test --headed 
+    ```
 
-4. **Run jasmin/karma:**
-   ```bash  
-   tests ng test
+2.  **Run the front end project:**
+
+    ```bash
+    ng serve
+
+    ```
+
+3.  **Run e2e tests:**
+
+    ```bash
+    npx playwright test --headed
+    ```
+
+    ```bash
+    npx cypress open
+    npx cypress run --headless
+    ```
+
+4.  **Run jasmin/karma:**
+
+    ```bash
+    tests ng test
+    ```
 
 ### Screenshots
 
@@ -87,3 +102,7 @@ To start using the WonderWorl Children's Library System, follow these simple ste
 ![Admin Panel](src/assets/admin.png),
 
 ![User Account Management](src/assets/user.png)
+
+```
+
+```

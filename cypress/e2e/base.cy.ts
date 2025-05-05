@@ -97,8 +97,7 @@ describe("Borrow book", () => {
   it("should borrow a book", () => {
     cy.url().should("include", "/user");
     cy.get(".logo").click();
-    cy.wait(2000);
-    cy.get('[data-cy="new-arrival-first-book"] > :nth-child(1)').click();
+    cy.get('[data-cy="new-arrival-first-book"] > :nth-child(1)', { timeout: 2000 }).should("be.visible").click();
     cy.get('[data-cy="button-borrow-book"]').click();
     cy.get('[data-cy="button-borrow-book"]').should("have.class", "disabled");
   });
